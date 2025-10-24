@@ -27,3 +27,23 @@ exports.getAllCards = (req, res) => {
     }
   });
 };
+
+// Додати нову картку
+exports.addCard = (req, res) => {
+  const { type, title, price, benefits } = req.body;
+
+  // Перевірка — всі поля мають бути заповнені
+  if (!type || !title || !price || !benefits) {
+    return res.status(400).json({ error: 'Будь ласка, заповніть усі поля' });
+  }
+
+  const sql = 'INSERT INTO club_cards (type, title, price, benefits) VALUES (?, ?, ?, ?)';
+  db.query(sql, [type, title, price, benefits], (err, result) => {
+    if (err) {
+      console.error(' Помилка при додаванні картки:', err);
+      res.status(500).json({ error: 'Помилка при додаванні картки' });
+    } else {
+      res.status(201).json({ message: 'Картку додано успішно', id: result.insertId });
+    }
+  });
+};

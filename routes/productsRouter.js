@@ -7,9 +7,12 @@
 
 const express = require('express');
 const router = express.Router();
-const { getAllCards } = require('../controllers/productController');
+const { getAllCards, addCard } = require('../controllers/productController');
 
-// маршрут /api/cards
+// GET — отримати всі картки
 router.get('/cards', getAllCards);
+
+// POST — додати нову картку
+router.post('/cards', addCard);
 
 module.exports = router;

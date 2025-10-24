@@ -24,6 +24,7 @@ app.use(express.json());
 // Маршрути
 app.use('/api', productsRouter);
 
+
 // Тестовий маршрут
 app.get('/', (req, res) => {
   res.send('Сервер працює');
